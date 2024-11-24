@@ -7,7 +7,9 @@ import { formFieldSchema } from './schema';
 
 export async function generateFormResponse(prompt: string) {
   const { object } = await generateObject({
-    model: anthropic('claude-3-5-haiku-latest'),
+    model: anthropic('claude-3-5-haiku-latest', {
+      cacheControl: true
+    }),
     schema: z.object({
       forms: z.array(formFieldSchema),
     }),

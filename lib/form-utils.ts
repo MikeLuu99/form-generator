@@ -1,11 +1,24 @@
-import { type FormField } from '@/types'
+import type { FormField } from '@/types'
 import { z } from 'zod'
-import { languages } from '@/components/dynamicForm'
+
+
+const languages = [
+  { label: "English", value: "en" },
+  { label: "French", value: "fr" },
+  { label: "German", value: "de" },
+  { label: "Spanish", value: "es" },
+  { label: "Portuguese", value: "pt" },
+  { label: "Russian", value: "ru" },
+  { label: "Japanese", value: "ja" },
+  { label: "Korean", value: "ko" },
+  { label: "Chinese", value: "zh" },
+] as const
 
 export const generateZodSchema = (fields: FormField[]) => {
   const schemaMap: Record<string, any> = {}
   
-  fields.forEach((field) => {
+  // biome-ignore lint/complexity/noForEach: <explanation>
+    fields.forEach((field) => {
     let schema: z.ZodTypeAny
 
     switch (field.variant) {
