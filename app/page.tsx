@@ -5,12 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { generateFormResponse } from './actions/jsonOutput'
-import DynamicForm from '@/components/ui/dynamicForm'
+import DynamicForm from '@/components/dynamicForm'
 import { Loader2 } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import TestData from '@/data/test.json'
 
 interface FormData {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   forms: any[];
   // Add other properties if they exist in the response
 }
