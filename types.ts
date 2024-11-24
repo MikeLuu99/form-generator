@@ -1,6 +1,32 @@
 import type * as Locales from 'date-fns/locale'
 
-// Define the FormField type
+
+
+export interface FormField {
+  checked: boolean
+  description: string
+  disabled: boolean
+  label: string
+  name: string
+  placeholder: string
+  required: boolean
+  rowIndex: number
+  type: string
+  value: string
+  variant: string
+  min?: number
+  max?: number
+  step?: number
+  locale?: string
+  hour12?: boolean
+  className?: string
+}
+
+export interface DynamicFormProps {
+  fields: FormField[]
+  onSubmit: (data: any) => void
+}
+
 export type FormFieldType = {
   type: string
   variant: string
