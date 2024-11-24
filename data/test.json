@@ -1,0 +1,67 @@
+[
+  {
+    "checked": true,
+    "description": "Enter the name of the dish you want to cook",
+    "disabled": false,
+    "label": "Recipe Name",
+    "name": "recipe",
+    "placeholder": "Enter the name of the recipe",
+    "required": true,
+    "rowIndex": 0,
+    "type": "text",
+    "value": "",
+    "variant": "Input"
+  },
+  {
+    "checked": true,
+    "description": "Enter the ingredients required for the recipe",
+    "disabled": false,
+    "label": "Ingredients",
+    "name": "ingredients",
+    "placeholder": "List the ingredients needed",
+    "required": true,
+    "rowIndex": 1,
+    "type": "textarea",
+    "value": "",
+    "variant": "Text Area"
+  },
+  {
+    "checked": true,
+    "description": "Estimated time to prepare and cook the dish",
+    "disabled": false,
+    "label": "Cooking Time (minutes)",
+    "name": "cookingTime",
+    "placeholder": "Enter cooking time in minutes",
+    "required": true,
+    "rowIndex": 2,
+    "type": "number",
+    "value": "",
+    "variant": "Input"
+  },
+  {
+    "checked": true,
+    "description": "Select the difficulty level of the recipe",
+    "disabled": false,
+    "label": "Difficulty Level",
+    "name": "difficulty",
+    "placeholder": "Easy, Medium, or Hard",
+    "required": true,
+    "rowIndex": 3,
+    "type": "text",
+    "value": "",
+    "variant": "Input"
+  },
+  {
+    "checked": true,
+    "description": "Provide detailed instructions for preparing the dish",
+    "disabled": false,
+    "label": "Cooking Instructions",
+    "name": "instructions",
+    "placeholder": "Enter step-by-step instructions",
+    "required": true,
+    "rowIndex": 4,
+    "type": "textarea",
+    "value": "",
+    "variant": "Text Area"
+  }
+]
