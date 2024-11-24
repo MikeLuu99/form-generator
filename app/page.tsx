@@ -8,17 +8,15 @@ import { generateFormResponse } from './actions/jsonOutput'
 import DynamicForm from '@/components/dynamicForm'
 import { Loader2 } from "lucide-react"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import TestData from '@/data/test.json'
+import type { FormField } from '@/components/dynamicForm' // Import the FormField type
 
-interface FormData {
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  forms: any[];
-  // Add other properties if they exist in the response
+interface FormResponse {
+  forms: FormField[];
 }
 
 export default function Home() {
   const [prompt, setPrompt] = useState('')
-  const [formFields, setFormFields] = useState<FormData | null>(null)
+  const [formFields, setFormFields] = useState<FormResponse | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -31,10 +29,34 @@ export default function Home() {
     try {
       setIsLoading(true)
       setError(null)
+      
       const result = await generateFormResponse(prompt)
       
-      console.log('Form fields:', JSON.stringify(result.forms, null, 2))
-      setFormFields(result)
+      // Validate and transform the API response
+      const validatedFields = result.forms.map((field: any) => ({
+        checked: field.checked ?? false,
+        description: field.description ?? "",
+        disabled: field.disabled ?? false,
+        label: field.label ?? "Untitled",
+        name: field.name ?? `field_${Math.random().toString(36).slice(2)}`,
+        placeholder: field.placeholder ?? "",
+        required: field.required ?? false,
+        rowIndex: field.rowIndex ?? 0,
+        type: field.type ?? "text",
+        value: field.value ?? "",
+        variant: field.variant ?? "Input",
+        // Optional properties
+        min: field.min,
+        max: field.max,
+        step: field.step,
+        locale: field.locale,
+        hour12: field.hour12,
+        className: field.className
+      })) as FormField[]
+
+      setFormFields({ forms: validatedFields })
+      
+      console.log('Form fields:', JSON.stringify(validatedFields, null, 2))
     } catch (err) {
       setError("Failed to generate form. Please try again.")
       console.error("Form generation error:", err)
@@ -43,8 +65,7 @@ export default function Home() {
     }
   }
 
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  const handleSubmit = async (data: any) => {
+  const handleSubmit = async (data: Record<string, any>) => {
     try {
       console.log('Form submitted:', data)
       // Handle form submission here
@@ -79,7 +100,7 @@ export default function Home() {
               />
               <Button 
                 onClick={handleGenerateForm} 
-                disabled={isLoading}
+                disabled={isLoading || !prompt.trim()}
               >
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                 {isLoading ? 'Generating...' : 'Generate Form'}

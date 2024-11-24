@@ -45,7 +45,7 @@ const languages = [
 ] as const
 
 // biome-ignore lint/suspicious/noRedeclare: <explanation>
-interface FormField {
+export interface FormField {
   checked: boolean
   description: string
   disabled: boolean
